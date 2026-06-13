@@ -1,142 +1,143 @@
-{\rtf1\ansi\ansicpg1252\cocoartf2867
-\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
-{\colortbl;\red255\green255\blue255;}
-{\*\expandedcolortbl;;}
-\paperw11900\paperh16840\margl1440\margr1440\vieww11520\viewh8400\viewkind0
-\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Expenditure Predictor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .calculator-card {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-top: 0;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #666;
+            font-weight: bold;
+        }
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            font-size: 16px;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .result-box {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 18px;
+            color: #333;
+            display: none; /* Hidden by default until calculation */
+        }
+        .equation-note {
+            font-size: 12px;
+            color: #888;
+            text-align: center;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
 
-\f0\fs24 \cf0 <!DOCTYPE html>\
-<html lang="en">\
-<head>\
-  <meta charset="UTF-8" />\
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />\
-  <title>Food Expenditure Predictor</title>\
-  <style>\
-    body \{\
-      font-family: Arial, sans-serif;\
-      background: #f4f6f8;\
-      display: flex;\
-      justify-content: center;\
-      align-items: center;\
-      min-height: 100vh;\
-      margin: 0;\
-    \}\
-\
-    .container \{\
-      background: white;\
-      padding: 30px;\
-      border-radius: 12px;\
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);\
-      width: 360px;\
-    \}\
-\
-    h2 \{\
-      text-align: center;\
-      margin-bottom: 10px;\
-      color: #222;\
-    \}\
-\
-    .formula \{\
-      text-align: center;\
-      font-size: 14px;\
-      color: #555;\
-      margin-bottom: 25px;\
-    \}\
-\
-    label \{\
-      display: block;\
-      margin-top: 15px;\
-      font-weight: bold;\
-      color: #333;\
-    \}\
-\
-    input \{\
-      width: 100%;\
-      padding: 10px;\
-      margin-top: 6px;\
-      border: 1px solid #ccc;\
-      border-radius: 6px;\
-      font-size: 15px;\
-      box-sizing: border-box;\
-    \}\
-\
-    button \{\
-      width: 100%;\
-      margin-top: 25px;\
-      padding: 12px;\
-      border: none;\
-      border-radius: 6px;\
-      background: #1f6f43;\
-      color: white;\
-      font-size: 16px;\
-      cursor: pointer;\
-    \}\
-\
-    button:hover \{\
-      background: #155c35;\
-    \}\
-\
-    .result \{\
-      margin-top: 25px;\
-      padding: 15px;\
-      background: #eef8f1;\
-      border-left: 5px solid #1f6f43;\
-      border-radius: 6px;\
-      font-size: 16px;\
-      color: #222;\
-      display: none;\
-    \}\
-\
-    .error \{\
-      margin-top: 15px;\
-      color: red;\
-      font-size: 14px;\
-      display: none;\
-    \}\
-  </style>\
-</head>\
-<body>\
-  <div class="container">\
-    <h2>Food Expenditure Predictor</h2>\
-    <div class="formula">\
-      Model: Food = -1.118 + 0.148(Income) + 0.793(Family Size)\
-    </div>\
-\
-    <label for="income">Income (RM)</label>\
-    <input type="number" id="income" placeholder="Enter income" step="0.01" />\
-\
-    <label for="familySize">Family Size</label>\
-    <input type="number" id="familySize" placeholder="Enter family size" step="1" />\
-\
-    <button onclick="calculateFoodExpenditure()">Calculate</button>\
-\
-    <div class="error" id="errorMessage">\
-      Please enter valid values for both income and family size.\
-    </div>\
-\
-    <div class="result" id="resultBox"></div>\
-  </div>\
-\
-  <script>\
-    function calculateFoodExpenditure() \{\
-      const income = parseFloat(document.getElementById("income").value);\
-      const familySize = parseFloat(document.getElementById("familySize").value);\
-      const resultBox = document.getElementById("resultBox");\
-      const errorMessage = document.getElementById("errorMessage");\
-\
-      if (isNaN(income) || isNaN(familySize)) \{\
-        resultBox.style.display = "none";\
-        errorMessage.style.display = "block";\
-        return;\
-      \}\
-\
-      const predictedFood = -1.118 + (0.148 * income) + (0.793 * familySize);\
-\
-      errorMessage.style.display = "none";\
-      resultBox.style.display = "block";\
-      resultBox.innerHTML =\
-        "Predicted Food Expenditure: <strong>RM " + predictedFood.toFixed(2) + "</strong>";\
-    \}\
-  </script>\
-</body>\
-</html>}
+<div class="calculator-card">
+    <h2>Food Expenditure Predictor</h2>
+    
+    <div class="form-group">
+        <label for="income">Monthly Income (RM):</label>
+        <input type="number" id="income" placeholder="e.g., 50" step="any" required>
+    </div>
+    
+    <div class="form-group">
+        <label for="familySize">Family Size (Number of people):</label>
+        <input type="number" id="familySize" placeholder="e.g., 4" step="any" required>
+    </div>
+    
+    <button onclick="calculateFood()">Calculate Prediction</button>
+    
+    <div id="result" class="result-box">
+        <strong>Predicted Food Expenditure:</strong><br>
+        <span id="predictedValue" style="font-size: 24px; color: #28a745; font-weight: bold;">RM 0.00</span>
+    </div>
+
+    <div class="equation-note">
+        Model Used: Food = -1.1183 + 0.1482(Income) + 0.7931(Family Size)
+    </div>
+</div>
+
+<script>
+    function calculateFood() {
+        // 1. Get the input values
+        var incomeInput = document.getElementById('income').value;
+        var sizeInput = document.getElementById('familySize').value;
+        
+        // Check if inputs are empty
+        if (incomeInput === "" || sizeInput === "") {
+            alert("Please enter both Income and Family Size.");
+            return;
+        }
+
+        var income = parseFloat(incomeInput);
+        var familySize = parseFloat(sizeInput);
+
+        // 2. Apply the regression model formula
+        // Food = -1.1183 + 0.1482*(Income) + 0.7931*(Family Size)
+        var predictedFood = -1.1183 + (0.1482 * income) + (0.7931 * familySize);
+
+        // Prevent negative predictions (since negative food expenditure doesn't make sense)
+        if (predictedFood < 0) {
+            predictedFood = 0;
+        }
+
+        // 3. Display the result
+        var resultDiv = document.getElementById('result');
+        var predictedValueSpan = document.getElementById('predictedValue');
+        
+        // Format to 2 decimal places for currency
+        predictedValueSpan.innerHTML = "RM " + predictedFood.toFixed(2);
+        
+        // Make the result box visible
+        resultDiv.style.display = "block";
+    }
+</script>
+
+</body>
+</html>
